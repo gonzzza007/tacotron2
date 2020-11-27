@@ -6,7 +6,7 @@ import numpy as np
 
 class Config:
     # ** Audio params **
-    sampling_rate = 22050                        # Sampling rate
+    sampling_rate = 44100                        # Sampling rate
     filter_length = 1024                         # Filter length
     hop_length = 256                             # Hop (stride) length
     win_length = 1024                            # Window length
@@ -28,7 +28,7 @@ class Config:
     n_speakers = 128                             # Number of speakers
     speakers_embedding_dim = 16                  # Speaker embedding dimension
     try:
-        speaker_coefficients = json.load(open('/drl/train/speaker_coefficients.json'))  # Dict with speaker coefficients
+        speaker_coefficients = json.load(open('train/speaker_coefficients.json'))  # Dict with speaker coefficients
     except IOError:
         print("Speaker coefficients dict is not available")
         speaker_coefficients = None
@@ -38,7 +38,7 @@ class Config:
     n_emotions = 15                              # N emotions
     emotions_embedding_dim = 8                   # Emotion embedding dimension
     try:
-        emotion_coefficients = json.load(open('/drl/train/emotion_coefficients.json'))  # Dict with emotion coefficients
+        emotion_coefficients = json.load(open('train/emotion_coefficients.json'))  # Dict with emotion coefficients
     except IOError:
         print("Emotion coefficients dict is not available")
         emotion_coefficients = None
@@ -125,8 +125,8 @@ class Config:
     # Dataset
     load_mel_from_dist = False                   # Loads mel spectrograms from disk instead of computing them on the fly
     text_cleaners = ['english_cleaners']         # Type of text cleaners for input text
-    training_files = '/drl/train/train.txt'          # Path to training filelist
-    validation_files = '/drl/train/val.txt'          # Path to validation filelist
+    training_files = 'train/train.txt'          # Path to training filelist
+    validation_files = 'train/val.txt'          # Path to validation filelist
 
     dist_url = 'tcp://localhost:23456'           # Url used to set up distributed training
     group_name = "group_name"                    # Distributed group name
@@ -146,7 +146,7 @@ class Config:
 
 
 class PreprocessingConfig:
-    cpus = 42                                    # Amount of cpus for parallelization
+    cpus = 1                                     # Amount of cpus for parallelization
     sr = 22050                                   # sampling ratio for audio processing
     top_db = 40                                  # level to trim audio
     limit_by = 'linda_johnson'                   # speaker to measure text_limit, dur_limit
@@ -154,34 +154,193 @@ class PreprocessingConfig:
     text_limit = None                            # max text length (used by default)
     dur_limit = None                             # max audio duration (used by default)
     n = 15000                                    # max size of training dataset per speaker
-    start_from_preprocessed = True               # load data.csv - should be in output_directory
+    start_from_preprocessed = False              # load data.csv - should be in output_directory
 
-    output_directory = '/drl/train'
+    output_directory = 'train'
     data = [
         {
-            'path': '/drl/raw-data/linda_johnson',
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_01',
             'speaker_id': 0,
-            'process_audio': False,
-            'emotion_present': False
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
         },
         {
-           'path': '/drl/raw-data/scarjo_the_dive_descript_grouped_50mil',
-           'speaker_id': 1,
-           'process_audio': True,
-           'emotion_present': False
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_02',
+            'speaker_id': 1,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
         },
         {
-           'path': '/drl/raw-data/scarjo_the_dive_descript_ungrouped',
-           'speaker_id': 1,
-           'process_audio': True,
-           'emotion_present': False
-        },
-        {
-            'path': '/drl/raw-data/melissa',
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_03',
             'speaker_id': 2,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_04',
+            'speaker_id': 3,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_05',
+            'speaker_id': 4,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_06',
+            'speaker_id': 5,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_07',
+            'speaker_id': 6,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_08',
+            'speaker_id': 7,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_09',
+            'speaker_id': 8,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_10',
+            'speaker_id': 9,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_11',
+            'speaker_id': 10,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_12',
+            'speaker_id': 11,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_13',
+            'speaker_id': 12,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_14',
+            'speaker_id': 13,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_15',
+            'speaker_id': 14,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_16',
+            'speaker_id': 15,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_17',
+            'speaker_id': 16,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_18',
+            'speaker_id': 17,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_19',
+            'speaker_id': 18,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_20',
+            'speaker_id': 19,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_21',
+            'speaker_id': 20,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_22',
+            'speaker_id': 21,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_23',
+            'speaker_id': 22,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_24',
+            'speaker_id': 23,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_25',
+            'speaker_id': 24,
+            'metadata_file': 'metadata.csv',
+            'process_audio': True,
+            'emotion_present': True
+        },
+        {
+            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_26',
+            'speaker_id': 25,
+            'metadata_file': 'metadata.csv',
             'process_audio': True,
             'emotion_present': True
         }
+        
     ]
 
     emo_id_map = {
