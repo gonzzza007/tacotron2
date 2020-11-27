@@ -96,14 +96,14 @@ class Config:
 
     # ** Script args **
     model_name = "Tacotron2"
-    output_directory = "/drl/logs"                   # Directory to save checkpoints
+    output_directory = "logs"                    # Directory to save checkpoints
     log_file = "nvlog.json"                      # Filename for logging
 
     anneal_steps = [500, 1000, 1500]             # Epochs after which decrease learning rate
     anneal_factor = 0.1                          # Factor for annealing learning rate
 
-    tacotron2_checkpoint = '/drl/pretrained/t2_fp32_torch'   # Path to pre-trained Tacotron2 checkpoint for sample generation
-    waveglow_checkpoint = '/drl/pretrained/wg_fp32_torch'    # Path to pre-trained WaveGlow checkpoint for sample generation
+    tacotron2_checkpoint = 'pretrained/t2_fp32_torch'   # Path to pre-trained Tacotron2 checkpoint for sample generation
+    waveglow_checkpoint = 'pretrained/wg_fp32_torch'    # Path to pre-trained WaveGlow checkpoint for sample generation
     restore_from = ''                                        # Checkpoint path to restore from
 
     # Training params
@@ -120,7 +120,8 @@ class Config:
     learning_rate = 1e-3                         # Learning rate
     weight_decay = 1e-6                          # Weight decay
     grad_clip_thresh = 1                         # Clip threshold for gradients
-    batch_size = 64                              # Batch size per GPU
+    batch_size = 32                              # Batch size per GPU
+    # batch_size = 64                              # Batch size per GPU
 
     # Dataset
     load_mel_from_dist = False                   # Loads mel spectrograms from disk instead of computing them on the fly
@@ -147,7 +148,7 @@ class Config:
 
 class PreprocessingConfig:
     cpus = 1                                     # Amount of cpus for parallelization
-    sr = 22050                                   # sampling ratio for audio processing
+    sr = 44100                                   # sampling ratio for audio processing
     top_db = 40                                  # level to trim audio
     limit_by = 'linda_johnson'                   # speaker to measure text_limit, dur_limit
     minimum_viable_dur = 0.05                    # min duration of audio
