@@ -444,8 +444,10 @@ def main():
             train_epoch_avg_items_per_sec = 0.0
             num_iters = 0
 
+            now = datetime.now().strftime('%H:%M')
+
             if args.rank == 0:
-                pb = tqdm(enumerate(train_loader), total=len(train_loader), desc=f'Epoch: {epoch}/{Config.epochs}')
+                pb = tqdm(enumerate(train_loader), total=len(train_loader), desc=f'{now} Epoch: {epoch}/{Config.epochs}')
             else:
                 pb = enumerate(train_loader)
 
