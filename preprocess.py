@@ -156,7 +156,7 @@ def main():
         for speaker_data in tqdm(Config.data):
             for speaker_path, dirs, files in os.walk(speaker_data['path']):
                 if 'wavs' in dirs and 'metadata.csv' in files:
-                    speaker_name = speaker_data['path'].split('/')[-1]
+                    speaker_name = os.path.basename(speaker_data['path'])
                     speaker_id = speaker_data['speaker_id']
                     process_audio = speaker_data['process_audio']
                     emotion_present = speaker_data['emotion_present']
@@ -205,7 +205,7 @@ def main():
     trains, vals = [], []
 
     for speaker_data in Config.data:
-        speaker_name = speaker_data['path'].split('/')[-1]
+        speaker_name = os.path.basename(speaker_data['path'])
 
         df = distribution[distribution['speaker_name'] == speaker_name]
         df = df[(df['text_len'] <= maxt) & (df['text_len'] >= 1) &
