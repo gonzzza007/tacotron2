@@ -6,7 +6,7 @@ import numpy as np
 
 class Config:
     # ** Audio params **
-    sampling_rate = 44100                        # Sampling rate
+    sampling_rate = 22050                        # Sampling rate
     filter_length = 1024                         # Filter length
     hop_length = 256                             # Hop (stride) length
     win_length = 1024                            # Window length
@@ -147,200 +147,154 @@ class Config:
 
 
 class PreprocessingConfig:
-    cpus = 1                                     # Amount of cpus for parallelization
-    sr = 44100                                   # sampling ratio for audio processing
-    top_db = 40                                  # level to trim audio
-    limit_by = 'linda_johnson'                   # speaker to measure text_limit, dur_limit
+    cpus = 8                                    # Amount of cpus for parallelization
+    sr = 22050                                   # sampling ratio for audio processing
+    top_db = 60                                  # level to trim audio
+    limit_by = 'Actor_000'                       # speaker to measure text_limit, dur_limit
     minimum_viable_dur = 0.05                    # min duration of audio
     text_limit = None                            # max text length (used by default)
     dur_limit = None                             # max audio duration (used by default)
     n = 15000                                    # max size of training dataset per speaker
-    start_from_preprocessed = False              # load data.csv - should be in output_directory
+    start_from_preprocessed = True              # load data.csv - should be in output_directory
 
     output_directory = 'train'
+    
+
+    ###########################################################
+    # emotion_present - True by default
+    # process_audio - True by default
+    # speaker_id - autoincrement from - 0 
+    ###########################################################
     data = [
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_01',
-            'speaker_id': 0,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_02',
-            'speaker_id': 1,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_03',
-            'speaker_id': 2,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_04',
-            'speaker_id': 3,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_05',
-            'speaker_id': 4,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_06',
-            'speaker_id': 5,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_07',
-            'speaker_id': 6,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_08',
-            'speaker_id': 7,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_09',
-            'speaker_id': 8,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_10',
-            'speaker_id': 9,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_11',
-            'speaker_id': 10,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_12',
-            'speaker_id': 11,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_13',
-            'speaker_id': 12,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_14',
-            'speaker_id': 13,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_15',
-            'speaker_id': 14,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_16',
-            'speaker_id': 15,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_17',
-            'speaker_id': 16,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_18',
-            'speaker_id': 17,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_19',
-            'speaker_id': 18,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_20',
-            'speaker_id': 19,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_21',
-            'speaker_id': 20,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_22',
-            'speaker_id': 21,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_23',
-            'speaker_id': 22,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_24',
-            'speaker_id': 23,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_25',
-            'speaker_id': 24,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        },
-        {
-            'path': 'C:\\Users\\gonzzza\\SOD\\DATASET\\Actor_26',
-            'speaker_id': 25,
-            'metadata_file': 'metadata.csv',
-            'process_audio': True,
-            'emotion_present': True
-        }
+        { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_000', 'process_audio': True },
+        { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_001', 'process_audio': True },
+        { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_002', 'process_audio': True }
+
+
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_004' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_005' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_006' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_007' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_008' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_009' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_010' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_011' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_012' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_013' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_014' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_015' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_016' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_017' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_018' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_019' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_020' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_021' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_022' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_023' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_024' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_025' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_026' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_027' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_028' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_029' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_030' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_031' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_032' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_033' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_034' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_035' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_036' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_037' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_038' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_039' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_040' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_041' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_042' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_043' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_044' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_045' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_046' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_047' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_048' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_049' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_050' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_051' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_052' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_053' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_054' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_055' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_056' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_057' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_058' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_059' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_060' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_061' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_062' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_063' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_064' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_065' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_066' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_067' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_068' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_069' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_070' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_071' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_072' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_073' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_074' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_075' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_076' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_077' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_078' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_079' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_080' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_081' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_082' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_083' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_084' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_085' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_086' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_087' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_088' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_089' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_090' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_091' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_092' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_093' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_094' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_095' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_096' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_097' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_098' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_099' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_100' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_101' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_102' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_103' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_104' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_105' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_106' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_107' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_108' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_109' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_110' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_111' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_112' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_113' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_114' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_115' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_116' },
+        # { 'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_117' }
+
+
+        # {
+        #     'path': 'C:\\Users\\gonza\\SOD\\DATASET\\Actor_04',
+        #     'speaker_id': 3,
+        #     'metadata_file': 'metadata.csv',
+        #     'process_audio': True,
+        #     'emotion_present': True
+        # },
+
         
     ]
 

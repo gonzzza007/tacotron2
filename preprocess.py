@@ -153,16 +153,18 @@ def main():
         print('Loaded data.csv')
     else:
         jobs = []
+        speaker_id = 0
         for speaker_data in tqdm(Config.data):
             for speaker_path, dirs, files in os.walk(speaker_data['path']):
                 if 'wavs' in dirs and 'metadata.csv' in files:
                     speaker_name = os.path.basename(speaker_data['path'])
-                    speaker_id = speaker_data['speaker_id']
-                    process_audio = speaker_data['process_audio']
-                    emotion_present = speaker_data['emotion_present']
+                    # speaker_id = speaker_data['speaker_id']
+                    process_audio = speaker_data['process_audio'] if 'process_audio' in speaker_data else True
+                    emotion_present = speaker_data['emotion_present'] if 'emotion_present' in speaker_data else True
 
                     sub_jobs = process(speaker_path, speaker_name, speaker_id, process_audio, emotion_present)
                     jobs += sub_jobs
+                    speaker_id += 1
 
         print('Files to convert:', len(jobs))
         time.sleep(5)
@@ -206,6 +208,8 @@ def main():
 
     for speaker_data in Config.data:
         speaker_name = os.path.basename(speaker_data['path'])
+
+        print('speaker_name: {}'.format(speaker_name))
 
         df = distribution[distribution['speaker_name'] == speaker_name]
         df = df[(df['text_len'] <= maxt) & (df['text_len'] >= 1) &

@@ -54,7 +54,7 @@ def load_filepaths_and_text(filename, use_emotions=False, split="|"):
             path = parts[0]
             text = parts[1]
             speaker_id = int(parts[2])
-            emotion_id = int(parts[3]) if use_emotions else None
+            emotion_id = int(float(parts[3])) if use_emotions else None
 
             return path, text, speaker_id, emotion_id
         filepaths_and_text = [split_line(line) for line in f]
